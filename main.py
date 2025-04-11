@@ -38,6 +38,11 @@ class EditTodo(BaseModel):
 todos: List[Todo] = []
 
 
+@app.get("/")
+def root():
+    return {"message": "Hello from FastAPI"}
+
+
 @app.get("/todos", response_model=List[Todo])
 def get_todos():
     return todos
