@@ -6,10 +6,15 @@ from uuid import uuid4
 
 app = FastAPI()
 
+origins = [
+    "http://localhost:3000",  # 本機開發用
+    "https://nuxt3-todo.vercel.app/"  # Vercel 正式網址
+]
+
 # CORS 設定：允許的前端網址
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
