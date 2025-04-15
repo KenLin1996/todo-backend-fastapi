@@ -2,7 +2,7 @@
 from fastapi import APIRouter, HTTPException
 from db.mongodb import db
 from bson import ObjectId
-from models.todo import Todo, TodoCreate, EditTodo
+from models.todo import TodoCreate, EditTodo
 
 
 router = APIRouter()
