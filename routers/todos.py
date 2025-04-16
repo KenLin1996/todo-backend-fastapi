@@ -39,7 +39,7 @@ async def edit_todo(todo_id: str, todo_edit: EditTodo):
 
 @router.delete("/todos/{todo_id}")
 async def delete_todo(todo_id: str):
-    result = await db["todos"].delete_one({"_id": todo_id})
-    if result.modifield.count == 0:
+    result = await db["todos"].delete_one({"_id": ObjectId(todo_id)})
+    if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Todo not found")
     return {"message": "Todo deleted"}
