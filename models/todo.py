@@ -23,3 +23,9 @@ class EditTodo(BaseModel):
     text: Optional[str] = None
     completed: Optional[bool] = None  # 表示欄位可以是 bool，也可以是 None。
     order: Optional[int] = None
+
+
+# 拖曳排序用的模型（只包含 id 和 order）
+class TodoOrderUpdate(BaseModel):
+    id: str
+    order: int
