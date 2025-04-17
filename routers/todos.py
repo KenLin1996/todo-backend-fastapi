@@ -22,11 +22,18 @@ async def get_todos():
 
 
 @router.post("/todos")
-async def create_tod(todo: TodoCreate):
-    last_todo = await db["todos"].find_one(sort=[("order", -1)])
-    max_todo = last_todo["order"] if last_todo and "order" in last_todo else 0
-
-    new_order = todo.order if todo.order is not None else max_todo + 1
+async def create_todo(todo: TodoCreate):
+    first_todo = await db["todos"].find_one(sort=[("order", 1)])
+    # 如果沒有任何待辦事項，則設置新的 todo 的 order 為 1
+    if first_todo is None:
+        new_order = 1
+    else:
+        # 如果已有待辦事項，則將所有 todo 的 order 增加 1，再將新的 todo 排在最前面
+        await db["todos"].update_many(
+            {},  # 更新所有資料
+            {"$inc": {"order": 1}}  # 每一筆的 order 都加 1
+        )
+        new_order = 1  # 新的 todo order 設為最小，排最前面
 
     todo_data = {
         "text": todo.text,
