@@ -1,7 +1,7 @@
 # main.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import todos, test
+from routers import todos, user, test
 
 app = FastAPI()
 
@@ -22,6 +22,7 @@ app.add_middleware(
 )
 
 app.include_router(todos.router)
+app.include_router(user.router)
 app.include_router(test.router)
 
 

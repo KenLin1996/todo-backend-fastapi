@@ -1,6 +1,6 @@
 # models/todo.py
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 
 
 # 待辦事項的模型（回傳用，會包含 id 和 order）
@@ -29,3 +29,6 @@ class EditTodo(BaseModel):
 class TodoOrderUpdate(BaseModel):
     id: str
     order: int
+
+class TodoOrderRequest(BaseModel):
+    new_order: List[str]
