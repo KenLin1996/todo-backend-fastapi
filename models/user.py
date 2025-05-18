@@ -4,6 +4,7 @@ from typing import Optional
 
 # 使用者註冊時傳入的資料格式
 class UserCreate(BaseModel):
+    name: str
     email: EmailStr
     password: str
 
@@ -15,12 +16,14 @@ class UserLogin(BaseModel):
 # 回傳給前端的使用者資料（可選擇性回傳 id 或 email）
 class UserOut(BaseModel):
     id: str
+    name: str
     email: EmailStr
 
 
 # 若有需要內部使用的完整資料格式（例如包含雜湊密碼）
 class UserInDB(BaseModel):
     id: str
+    name: str
     email: EmailStr
     hashed_password: str
     

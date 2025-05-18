@@ -10,7 +10,8 @@ import os
 SECRIT_KEY = os.getenv("SECRET_KEY", "super-secret")
 ALGORITHM = "HS256"
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/user/login")
+# oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/user/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
 
 async def get_current_user(token: str = Depends(oauth2_scheme)) -> UserInDB:
     credentials_exception = HTTPException(
@@ -30,4 +31,4 @@ async def get_current_user(token: str = Depends(oauth2_scheme)) -> UserInDB:
     if not user:
         raise credentials_exception
     
-    return UserInDB(id=str(user["_id"]), email=user["email"], hashed_password=user["hashed_password"])
+    return UserInDB(id=str(user["_id"]), name=user["name"],email=user["email"], hashed_password=user["hashed_password"])
